@@ -42,29 +42,56 @@ To get ratio you divide profit into EBT
 
 // }
 
+// session 36 steps
+// replace fmt.Print() and fmt.Scan() with a stand alone function
+// that should output some text
+// and then wait for the user to enter some text
+// and then return that entered value.
+
 package main
 
 import "fmt"
 
 func main() {
-	var revenue float64
-	var expenses float64
-	var taxRate float64
+	// var revenue float64
+	// var expenses float64
+	// var taxRate float64
 
-	fmt.Print("Revenue: ")
-	fmt.Scan(&revenue)
+	revenue := getUserInput("Revenue: ")
+	// fmt.Print("Revenue: ")
+	// fmt.Scan(&revenue)
 
-	fmt.Print("Expenses: ")
-	fmt.Scan(&expenses)
+	expenses := getUserInput("Expenses: ")
+	// fmt.Print("Expenses: ")
+	// fmt.Scan(&expenses)
 
-	fmt.Print("Tax Rate: ")
-	fmt.Scan(&taxRate)
+	taxRate := getUserInput("Tax Rate: ")
+	// fmt.Print("Tax Rate: ")
+	// fmt.Scan(&taxRate)
 
-	ebt := revenue - expenses
-	profit := ebt * (1 - taxRate/100)
-	ratio := ebt / profit
+	ebt, profit, ratio := calculateFinancial(revenue, expenses, taxRate)
 
-	fmt.Println(ebt)
-	fmt.Println(profit)
-	fmt.Println(ratio)
+	// ebt := revenue - expenses
+	// profit := ebt * (1 - taxRate/100)
+	// ratio := ebt / profit
+
+	fmt.Printf("%.1f\n", ebt)
+	fmt.Printf("%.1f\n", profit)
+	fmt.Printf("%.3f\n", ratio)
+
+	// fmt.Print(ebt, profit, ratio)
+}
+
+func getUserInput(infoText string) float64 {
+	var userInput float64
+	fmt.Print(infoText)
+	fmt.Scan(&userInput)
+	return userInput
+}
+
+func calculateFinancial(revenue, expenses, taxRate float64) (ebt float64, profit float64, ratio float64) {
+	ebt = revenue - expenses
+	profit = ebt * (1 - taxRate/100)
+	ratio = ebt / profit
+	return 
 }
