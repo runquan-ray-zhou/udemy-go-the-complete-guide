@@ -14,30 +14,57 @@ To get profit you subtract taxes from EBT
 To get ratio you divide profit into EBT
 */
 
+// package main
+
+// import "fmt"
+
+// func main () {
+
+// 	var revenue, expense, taxRate float64
+
+// 	fmt.Print("What is your total revenue: ")
+// 	fmt.Scan(&revenue)
+
+// 	fmt.Print("What is your total expense: ")
+// 	fmt.Scan(&expense)
+
+// 	fmt.Print("What is the current tax rate: ")
+// 	fmt.Scan(&taxRate)
+
+// 	earningsBeforeTax := revenue - expense
+// 	taxes := earningsBeforeTax * (taxRate/100)
+// 	profit := earningsBeforeTax - taxes
+// 	ratio := earningsBeforeTax / profit
+
+// 	fmt.Println(earningsBeforeTax)
+// 	fmt.Println(profit)
+// 	fmt.Println(ratio)
+
+// }
+
 package main
 
 import "fmt"
 
-func main () {
+func main() {
+	var revenue float64
+	var expenses float64
+	var taxRate float64
 
-	var revenue, expense, taxRate float64
-
-	fmt.Print("What is your total revenue: ")
+	fmt.Print("Revenue: ")
 	fmt.Scan(&revenue)
 
-	fmt.Print("What is your total expense: ")
-	fmt.Scan(&expense)
+	fmt.Print("Expenses: ")
+	fmt.Scan(&expenses)
 
-	fmt.Print("What is the current tax rate: ")
+	fmt.Print("Tax Rate: ")
 	fmt.Scan(&taxRate)
 
-	earningsBeforeTax := revenue - expense
-	taxes := earningsBeforeTax * (taxRate/100)
-	profit := earningsBeforeTax - taxes
-	ratio := earningsBeforeTax / profit
+	ebt := revenue - expenses
+	profit := ebt * (1 - taxRate/100)
+	ratio := ebt / profit
 
-	fmt.Println(earningsBeforeTax)
+	fmt.Println(ebt)
 	fmt.Println(profit)
 	fmt.Println(ratio)
-
 }
