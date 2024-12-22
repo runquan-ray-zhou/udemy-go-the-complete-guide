@@ -20,6 +20,8 @@ import "fmt"
 
 func main () {
 
+	var revenue, expense, taxRate float64
+
 	fmt.Print("What is your total revenue: ")
 	fmt.Scan(&revenue)
 
@@ -28,4 +30,14 @@ func main () {
 
 	fmt.Print("What is the current tax rate: ")
 	fmt.Scan(&taxRate)
+
+	earningsBeforeTax := revenue - expense
+	taxes := earningsBeforeTax * (taxRate/100)
+	profit := earningsBeforeTax - taxes
+	ratio := earningsBeforeTax / profit
+
+	fmt.Println(earningsBeforeTax)
+	fmt.Println(profit)
+	fmt.Println(ratio)
+
 }
