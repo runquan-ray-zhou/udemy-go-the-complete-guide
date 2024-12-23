@@ -66,37 +66,40 @@ import (
 const profitFile = "profit.txt"
 
 func storeResultsToFile(ebt, profit, ratio float64) {
-	resultsText := fmt.Sprintf("ebt is %.1f, profit is %.1f, and ratio is %.3f", ebt, profit, ratio)
+	resultsText := fmt.Sprintf("ebt is %.1f\nprofit is %.1f\nratio is %.3f\n", ebt, profit, ratio)
 	os.WriteFile(profitFile, []byte(resultsText), 0644)
 }
 
 func main() {
 
-	revenue, err := getUserInput("Revenue: ")
+	revenue, err1 := getUserInput("Revenue: ")
 
-	if err != nil {
-		fmt.Println("ERROR")
-		fmt.Println(err)
-		fmt.Println("------------")
-		panic("Can't continue, sorry.")
-	}
+	// if err != nil {
+	// 	// fmt.Println("ERROR")
+	// 	fmt.Println(err)
+	// 	// fmt.Println("------------")
+	// 	// panic("Can't continue, sorry.")
+	// 	return
+	// }
 
-	expenses, err := getUserInput("Expenses: ")
+	expenses, err2 := getUserInput("Expenses: ")
 
-	if err != nil {
-		fmt.Println("ERROR")
-		fmt.Println(err)
-		fmt.Println("------------")
-		panic("Can't continue, sorry.")
-	}
+	// if err != nil {
+	// 	// fmt.Println("ERROR")
+	// 	fmt.Println(err)
+	// 	// fmt.Println("------------")
+	// 	// panic("Can't continue, sorry.")
+	// 	return
+	// }
 
-	taxRate, err := getUserInput("Tax Rate: ")
+	taxRate, err3 := getUserInput("Tax Rate: ")
 
-	if err != nil {
-		fmt.Println("ERROR")
-		fmt.Println(err)
-		fmt.Println("------------")
-		panic("Can't continue, sorry.")
+	if err1 != nil || err2 != nil || err3 != nil {
+		// fmt.Println("ERROR")
+		fmt.Println(err1)
+		// fmt.Println("------------")
+		// panic("Can't continue, sorry.")
+		return
 	}
 
 	ebt, profit, ratio := calculateFinancial(revenue, expenses, taxRate)
@@ -115,7 +118,8 @@ func getUserInput(infoText string) (float64, error) {
 	fmt.Scan(&userInput)
 
 	if userInput <= 0 {
-		return userInput, errors.New("invalid input. must be greater than 0 and non negative")
+		// return userInput, errors.New("invalid input. must be greater than 0 and non negative")
+		return 0, errors.New("value must be a positive number")
 	} else {
 		return userInput, nil
 	}
