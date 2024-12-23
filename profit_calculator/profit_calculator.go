@@ -48,50 +48,82 @@ To get ratio you divide profit into EBT
 // and then wait for the user to enter some text
 // and then return that entered value.
 
+//Goals
+// 1) Validate user input
+//    => Show error message & exit if invalid input is provided
+//    - No negative numbers
+//    - Not 0
+// 2) Store calculated results into file
+
 package main
 
-import "fmt"
+import (
+	"errors"
+	"fmt"
+	"os"
+)
+
+const profitFile = "profit.txt"
+
+func storeResultsToFile(ebt, profit, ratio float64) {
+	resultsText := fmt.Sprintf("ebt is %.1f, profit is %.1f, and ratio is %.3f", ebt, profit, ratio)
+	os.WriteFile(profitFile, []byte(resultsText), 0644)
+}
 
 func main() {
-	// var revenue float64
-	// var expenses float64
-	// var taxRate float64
 
-	revenue := getUserInput("Revenue: ")
-	// fmt.Print("Revenue: ")
-	// fmt.Scan(&revenue)
+	revenue, err := getUserInput("Revenue: ")
 
-	expenses := getUserInput("Expenses: ")
-	// fmt.Print("Expenses: ")
-	// fmt.Scan(&expenses)
+	if err != nil {
+		fmt.Println("ERROR")
+		fmt.Println(err)
+		fmt.Println("------------")
+		panic("Can't continue, sorry.")
+	}
 
-	taxRate := getUserInput("Tax Rate: ")
-	// fmt.Print("Tax Rate: ")
-	// fmt.Scan(&taxRate)
+	expenses, err := getUserInput("Expenses: ")
+
+	if err != nil {
+		fmt.Println("ERROR")
+		fmt.Println(err)
+		fmt.Println("------------")
+		panic("Can't continue, sorry.")
+	}
+
+	taxRate, err := getUserInput("Tax Rate: ")
+
+	if err != nil {
+		fmt.Println("ERROR")
+		fmt.Println(err)
+		fmt.Println("------------")
+		panic("Can't continue, sorry.")
+	}
 
 	ebt, profit, ratio := calculateFinancial(revenue, expenses, taxRate)
 
-	// ebt := revenue - expenses
-	// profit := ebt * (1 - taxRate/100)
-	// ratio := ebt / profit
+	storeResultsToFile(ebt, profit, ratio)
 
 	fmt.Printf("%.1f\n", ebt)
 	fmt.Printf("%.1f\n", profit)
 	fmt.Printf("%.3f\n", ratio)
 
-	// fmt.Print(ebt, profit, ratio)
 }
 
-func getUserInput(infoText string) float64 {
+func getUserInput(infoText string) (float64, error) {
 	var userInput float64
 	fmt.Print(infoText)
 	fmt.Scan(&userInput)
-	return userInput
+
+	if userInput <= 0 {
+		return userInput, errors.New("invalid input. must be greater than 0 and non negative")
+	} else {
+		return userInput, nil
+	}
 }
 
 func calculateFinancial(revenue, expenses, taxRate float64) (ebt float64, profit float64, ratio float64) {
 	ebt = revenue - expenses
 	profit = ebt * (1 - taxRate/100)
 	ratio = ebt / profit
-	return 
+	return
 }
