@@ -17,7 +17,7 @@ import (
 
 const inflationRate = 2.5
 
-func main () {
+func main() {
 	// investmentAmount, years, expectedReturnRate := 1000.0, 10.0, 5.5
 	var investmentAmount float64
 	var years float64
@@ -53,15 +53,15 @@ func outputText(text string) {
 	fmt.Print(text)
 }
 
-// Better to state what you are returning 
+// Better to state what you are returning
 // func calculateFutureValues(investmentAmount, expectedReturnRate, years float64 ) (float64, float64){
 // 	fv := investmentAmount * math.Pow(1 + expectedReturnRate / 100, years)
 // 	rfv := fv / math.Pow(1 + inflationRate/100, years)
 // 	return fv, rfv
 // }
 
-func calculateFutureValues(investmentAmount, expectedReturnRate, years float64 ) (fv float64, rfv float64){
-	fv = investmentAmount * math.Pow(1 + expectedReturnRate / 100, years)
-	rfv = fv / math.Pow(1 + inflationRate/100, years)
+func calculateFutureValues(investmentAmount, expectedReturnRate, years float64) (fv float64, rfv float64) {
+	fv = investmentAmount * math.Pow(1+expectedReturnRate/100, years)
+	rfv = fv / math.Pow(1+inflationRate/100, years)
 	return
 }
