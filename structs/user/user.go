@@ -6,7 +6,7 @@ import (
 	"time"
 )
 
-type user struct {
+type User struct {
 	firstName string
 	lastName  string
 	birthDate string
@@ -14,22 +14,22 @@ type user struct {
 }
 
 // methods
-func (u *user) outputUserDetails() { // dereference
+func (u *User) OutputUserDetails() { // dereference
 
 	fmt.Println(u.firstName, u.lastName, u.birthDate)
 }
 
-func (u *user) clearUserName() {
+func (u *User) ClearUserName() {
 	u.firstName = ""
 	u.lastName = ""
 }
 
 // constructor function - utility function that creates a struct
-func newUser(firstName, lastName, birthdate string) (*user, error) { //uses a pointer as return value
+func NewUser(firstName, lastName, birthdate string) (*User, error) { //uses a pointer as return value
 	if firstName == "" || lastName == "" || birthdate == "" {
 		return nil, errors.New("First name, last name and birthdate are required")
 	}
-	return &user{ // return pointer, prevent the value from being copied
+	return &User{ // return pointer, prevent the value from being copied
 		firstName: firstName,
 		lastName:  lastName,
 		birthDate: birthdate,

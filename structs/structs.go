@@ -3,6 +3,8 @@ package main
 import (
 	// "errors"
 	"fmt"
+
+	"github.com/runquan-ray-zhou/udemy-go-the-complete-guide/structs/user"
 	// "time" // work with date and time value
 )
 
@@ -11,9 +13,10 @@ func main() {
 	userLastName := getUserData("Please enter your last name: ")
 	userBirthdate := getUserData("Please enter your birthdate (MM/DD/YYYY): ")
 
-	var appUser *user
+	var appUser *user.User
 
-	appUser, err := newUser(userFirstName, userLastName, userBirthdate)
+	appUser, err := user.NewUser(userFirstName, userLastName, userBirthdate)
+	// appUser, err := newUser(userFirstName, userLastName, userBirthdate)
 
 	if err != nil {
 		fmt.Println(err)
@@ -31,9 +34,9 @@ func main() {
 
 	// outputUserDetails(&appUser) // passing pointer
 
-	appUser.outputUserDetails()
-	appUser.clearUserName()
-	appUser.outputUserDetails()
+	appUser.OutputUserDetails()
+	appUser.ClearUserName()
+	appUser.OutputUserDetails()
 }
 
 // func outputUserDetails(u *user) { // dereference
