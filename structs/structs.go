@@ -15,7 +15,7 @@ func main() {
 
 	var appUser *user.User
 
-	appUser, err := user.NewUser(userFirstName, userLastName, userBirthdate)
+	appUser, err := user.New(userFirstName, userLastName, userBirthdate)
 	// appUser, err := newUser(userFirstName, userLastName, userBirthdate)
 
 	if err != nil {
@@ -33,6 +33,14 @@ func main() {
 	// ... do something awesome with that gathered data!
 
 	// outputUserDetails(&appUser) // passing pointer
+
+	admin := user.NewAdmin("test@example.com", "test123")
+
+	admin.OutputUserDetails()
+	admin.ClearUserName()
+	admin.OutputUserDetails()
+
+	// when using anonymous embedding, you can access the fields and methods of the embedded struct directly
 
 	appUser.OutputUserDetails()
 	appUser.ClearUserName()

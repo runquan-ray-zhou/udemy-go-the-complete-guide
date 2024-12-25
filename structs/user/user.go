@@ -13,6 +13,12 @@ type User struct {
 	createdAt time.Time
 }
 
+type Admin struct {
+	email    string
+	password string
+	User
+}
+
 // methods
 func (u *User) OutputUserDetails() { // dereference
 
@@ -25,7 +31,21 @@ func (u *User) ClearUserName() {
 }
 
 // constructor function - utility function that creates a struct
-func NewUser(firstName, lastName, birthdate string) (*User, error) { //uses a pointer as return value
+
+func NewAdmin(email, password string) Admin {
+	return Admin{
+		email:    email,
+		password: password,
+		User: User{
+			firstName: "ADMIN",
+			lastName:  "ADMIN",
+			birthDate: "---",
+			createdAt: time.Now(),
+		},
+	}
+}
+
+func New(firstName, lastName, birthdate string) (*User, error) { //uses a pointer as return value
 	if firstName == "" || lastName == "" || birthdate == "" {
 		return nil, errors.New("First name, last name and birthdate are required")
 	}
