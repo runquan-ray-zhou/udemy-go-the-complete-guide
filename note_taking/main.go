@@ -1,44 +1,109 @@
 package main
 
 import (
-	"errors"
+	"bufio"
 	"fmt"
+	"os"
+	"strings"
+
+	"github.com/runquan-ray-zhou/udemy-go-the-complete-guide/note_taking/note"
+	"github.com/runquan-ray-zhou/udemy-go-the-complete-guide/note_taking/todo"
 )
 
+// interface
+type saver interface {
+	Save() error
+}
+
+// type displayer interface {
+// 	Display()
+// }
+
+type outputtable interface {
+	saver
+	Display()
+}
+
+// type outputtable interface {
+// 	Save() error
+// 	Display()
+// }
+
 func main() {
-	title, content, err := getNoteData()
+	printSomething(1)
+	printSomething(1.5)
+	printSomething("Hello")
+	title, content := getNoteData()
+
+	todoText := getUserInput("Todo text: ")
+
+	todo, err := todo.New(todoText)
 
 	if err != nil {
 		fmt.Println(err)
 		return
 	}
-}
 
-func getNoteData() (string, string, error) {
-	title, err := getUserInput("Note title:")
+	userNote, err := note.New(title, content)
 
 	if err != nil {
 		fmt.Println(err)
-		return "", "", err
+		return
 	}
 
-	content, err := getUserInput("Note content:")
+	err = outputData(todo)
 
 	if err != nil {
-		fmt.Println(err)
-		return "", "", err
+		return
 	}
-	return title, content, nil
+
+	outputData(userNote)
 }
 
-func getUserInput(prompt string) (string, error) {
-	fmt.Print(prompt)
-	var value string
-	fmt.Scan(&value)
+func printSomething(value interface{}) {
+	switch value.(type) {
+		case
+	}
+	fmt.Println(value)
+}
 
-	if value == "" {
-		return "", errors.New("invalid input")
+func outputData(data outputtable) error {
+	data.Display()
+	return saveData(data)
+}
+
+func saveData(data saver) error {
+	err := data.Save()
+
+	if err != nil {
+		fmt.Println("Saving the note failed.")
+		return err
 	}
 
-	return value, nil
+	fmt.Println("Saving the note succeeded!")
+	return nil
+}
+
+func getNoteData() (string, string) {
+	title := getUserInput("Note title:")
+	content := getUserInput("Note content:")
+
+	return title, content
+}
+
+func getUserInput(prompt string) string {
+	fmt.Printf("%v ", prompt)
+
+	reader := bufio.NewReader(os.Stdin) //reader that listens on the command line
+
+	text, err := reader.ReadString('\n') //use single for single bytes "runes"
+
+	if err != nil {
+		return ""
+	}
+
+	text = strings.TrimSuffix(text, "\n")
+	text = strings.TrimSuffix(text, "\r") // for windows
+
+	return text
 }
