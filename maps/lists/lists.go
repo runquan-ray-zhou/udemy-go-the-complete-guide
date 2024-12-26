@@ -1,63 +1,63 @@
-package main
+package lists
 
 import "fmt"
 
-type Product struct {
-	id    string
-	title string
-	price float64
-}
+// type Product struct {
+// 	id    string
+// 	title string
+// 	price float64
+// }
 
-func main() {
+// func main() {
 
-	hobbies := [3]string{"reading manga", "watching films", "playing killer sudoku"}
-	firstHobby := hobbies[0]
-	secondHobby := hobbies[1]
-	thirdHobby := hobbies[2]
-	newList := [2]string{secondHobby, thirdHobby}
+// 	hobbies := [3]string{"reading manga", "watching films", "playing killer sudoku"}
+// 	firstHobby := hobbies[0]
+// 	secondHobby := hobbies[1]
+// 	thirdHobby := hobbies[2]
+// 	newList := [2]string{secondHobby, thirdHobby}
 
-	sliceOne := hobbies[0:2]
-	sliceTwo := hobbies[:2]
+// 	sliceOne := hobbies[0:2]
+// 	sliceTwo := hobbies[:2]
 
-	reSlice := sliceOne[1:3]
+// 	reSlice := sliceOne[1:3]
 
-	goals := []string{"understand Golang", "get certificate"}
+// 	goals := []string{"understand Golang", "get certificate"}
 
-	goals[1] = "complete by end of year"
+// 	goals[1] = "complete by end of year"
 
-	goals = append(goals, "build a project")
+// 	goals = append(goals, "build a project")
 
-	products := []Product{
-		{
-			"first-product",
-			"A First Product",
-			12.99,
-		},
-		{
-			"second-product",
-			"A Second Product",
-			129.99,
-		},
-	}
+// 	products := []Product{
+// 		{
+// 			"first-product",
+// 			"A First Product",
+// 			12.99,
+// 		},
+// 		{
+// 			"second-product",
+// 			"A Second Product",
+// 			129.99,
+// 		},
+// 	}
 
-	newProduct := Product{
-		"third-product",
-		"A Third Product",
-		15.99,
-	}
+// 	newProduct := Product{
+// 		"third-product",
+// 		"A Third Product",
+// 		15.99,
+// 	}
 
-	products = append(products, newProduct)
+// 	products = append(products, newProduct)
 
-	fmt.Println(hobbies)
-	fmt.Println(firstHobby)
-	fmt.Println(newList)
-	fmt.Println(sliceOne)
-	fmt.Println(sliceTwo)
-	fmt.Println(reSlice)
-	fmt.Println(goals)
-	fmt.Println(products)
+// 	fmt.Println(hobbies)
+// 	fmt.Println(firstHobby)
+// 	fmt.Println(newList)
+// 	fmt.Println(sliceOne)
+// 	fmt.Println(sliceTwo)
+// 	fmt.Println(reSlice)
+// 	fmt.Println(goals)
+// 	fmt.Println(products)
 
-}
+// }
 
 // Time to practice what you learned!
 
@@ -77,18 +77,22 @@ func main() {
 //		dynamic list of products (at least 2 products).
 //		Then add a third product to the existing list of products.
 
-// func main() {
-// 	prices := []float64{10.99, 8.99} // this is a slice not an array. Go makes an array in the background
-// 	fmt.Println(prices[0:1])
-// 	prices[1] = 9.99
+func main() {
+	prices := []float64{10.99, 8.99} // this is a slice not an array. Go makes an array in the background
+	fmt.Println(prices[0:1])
+	prices[1] = 9.99
 
-// 	// updatedPrices := append(prices, 5.99)
-// 	// fmt.Println(updatedPrices, prices)
+	// updatedPrices := append(prices, 5.99)
+	// fmt.Println(updatedPrices, prices)
 
-// 	prices = append(prices, 5.99)
-// 	prices = prices[1:]
-// 	fmt.Println(prices)
-// }
+	prices = append(prices, 5.99, 12.99, 29.99, 100.10)
+	prices = prices[1:]
+	fmt.Println(prices)
+
+	discountPrices := []float64{101.99, 80.99, 20.59}
+	prices = append(prices, discountPrices...)
+	fmt.Println(prices)
+}
 
 // func main() {
 // 	var productNames [4]string = [4]string{"A Book"}
